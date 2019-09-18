@@ -3,6 +3,7 @@
 """Module for self-testing of runtests framework."""
 
 import os
+
 import runtests
 
 

@@ -2,9 +2,10 @@
 
 """Framework for automatic test collection and running."""
 
-import os
-from importlib import util
 import glob
+from importlib import util
+import os
+
 
 EXT = '.py'
 PREFIX = 'test_'
