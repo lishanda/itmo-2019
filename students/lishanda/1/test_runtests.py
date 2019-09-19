@@ -18,7 +18,7 @@ def test_load_module():
 
 def test_get_tests_from_module():
     """Test get_tests_from_module function."""
-    module = runtests.load_module('{0}/test_simple_operations.py'.format(
+    module = runtests.load_module('{0}/runtests.py'.format(
         os.getcwd(),
     ))
     assert runtests.get_tests_from_module(module) is not None

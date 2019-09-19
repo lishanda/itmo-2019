@@ -3,9 +3,8 @@
 """Framework for automatic test collection and running."""
 
 import glob
-from importlib import util
 import os
-
+from importlib import util
 
 EXT = '.py'
 PREFIX = 'test_'
@@ -39,6 +38,20 @@ def files_from_path(target_path, mask):
     return glob.glob('{0}/{1}'.format(target_path, mask), recursive=True)
 
 
+def test_test(test, test_file):
+    """Test extracted testing function."""
+    succeed = True
+    try:
+        test[1]()
+    except AssertionError:
+        succeed = False
+    print('{0} | {1} - {2}'.format(  # noqa: T001
+        test_file,
+        test[0],
+        'ok' if succeed else 'fail',
+    ))
+
+
 def launch_testing(path=''):
     """Load module for further testing."""
     # If target path is empty current directory is used
@@ -52,16 +65,7 @@ def launch_testing(path=''):
         # Running tests and logging results
         tests = get_tests_from_module(load_module(t_file))
         for test in tests.items():
-            succeed = True
-            try:
-                test[1]()
-            except AssertionError:
-                succeed = False
-            print('{0} | {1} - {2}'.format(  # noqa: T001
-                t_file,
-                test[0],
-                'ok' if succeed else 'fail',
-            ))
+            test_test(test, t_file)
 
 
 if __name__ == '__main__':
