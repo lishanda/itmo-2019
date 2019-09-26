@@ -6,7 +6,7 @@ M_NUMBER = 123
 TXT_FILENAME = 'file.txt'
 INV_ARG = 'wrong argument'
 PYSTR = 'python'
-CLISTR = 'cli.py'
+CLISTR = 'students/lishanda/3/cli.py'
 DIRSTR = 'dir'
 TXTSTR = ''
 
