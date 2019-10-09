@@ -39,15 +39,15 @@ class CatsCompositionTester(unittest.TestCase):
             show_information=print,  # noqa: T002
         )
 
-        self.assertTrue(os.path.exists(fact_file))
-        self.assertNotEqual(os.stat(fact_file).st_size, 0)
+        assert os.path.exists(fact_file)
+        assert os.stat(fact_file).st_size != 0
 
     def test_integration(self):
         """Test func."""
         format_str = 'python cats_composition_lishanda.py {0}'  # noqa E800
         arg = '--count=1'
         command_str = format_str.format(arg)
-        self.assertEqual(subprocess.call(command_str, shell=True), 0)  # noqa: S602, E501
+        assert subprocess.call(command_str, shell=True) == 0  # noqa: S602, E501
 
 
 if __name__ == '__main__':
