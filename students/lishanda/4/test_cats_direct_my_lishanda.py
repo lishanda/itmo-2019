@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import os
-import pytest
 import shutil
 import subprocess  # noqa S404
 import unittest
+
+import pytest
 
 import cats_direct_lishanda as cats_direct
 

@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import os
-import pytest
 import shutil
 import subprocess  # noqa S404
 import unittest
+
+import pytest
 
 from cats_composition_lishanda import CatProcessor, main
 from cats_direct_lishanda import fetch_cat_fact, fetch_cat_image, save_cat
