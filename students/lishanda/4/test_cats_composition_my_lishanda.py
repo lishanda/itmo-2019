@@ -5,7 +5,8 @@ import shutil
 import subprocess  # noqa S404
 import unittest
 
-import cats_composition_lishanda as cats_composition
+from cats_composition_lishanda import CatProcessor, main
+from cats_direct_lishanda import fetch_cat_fact, fetch_cat_image, save_cat
 
 
 class CatsCompositionTester(unittest.TestCase):
@@ -28,12 +29,12 @@ class CatsCompositionTester(unittest.TestCase):
         if os.path.exists(fact_file):
             os.remove(fact_file)
 
-        cat_processor = cats_composition.CatProcessor(
-            cats_composition.fetch_cat_fact,
-            cats_composition.fetch_cat_image,
-            cats_composition.save_cat,
+        cat_processor = CatProcessor(
+            fetch_cat_fact,
+            fetch_cat_image,
+            save_cat,
         )
-        cats_composition.main(
+        main(
             self.count,
             process_cat=cat_processor,
             show_information=print,  # noqa: T002
@@ -44,7 +45,7 @@ class CatsCompositionTester(unittest.TestCase):
 
     def test_integration(self):
         """Test func."""
-        format_str = 'python cats_composition_lishanda.py {0}'  # noqa E800
+        format_str = 'python students/lishanda/4/cats_composition_lishanda.py {0}'  # noqa E800
         arg = '--count=1'
         command_str = format_str.format(arg)
         assert subprocess.call(command_str, shell=True) == 0  # noqa: S602, E501

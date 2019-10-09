@@ -5,7 +5,7 @@ import shutil
 from typing import Tuple
 
 import requests
-from requests.packages import urllib3
+from urllib3 import HTTPResponse
 
 
 def create_parser() -> argparse.ArgumentParser:
@@ -35,13 +35,13 @@ def fetch_cat_fact(mock: bool = False) -> str:
     return response.json()['text']
 
 
-def fetch_cat_image() -> Tuple[str, urllib3.response.HTTPResponse]:
+def fetch_cat_image() -> Tuple[str, HTTPResponse]:
     """Fetches cat's image."""
     response = requests.get('https://aws.random.cat/meow')
     response.raise_for_status()
 
     image_url = response.json()['file']
-    image_extension = image_url.split('.')[-1]
+    image_extension: str = image_url.split('.')[-1]
     image = requests.get(image_url, stream=True)
     return image_extension, image.raw
 
@@ -49,7 +49,7 @@ def fetch_cat_image() -> Tuple[str, urllib3.response.HTTPResponse]:
 def save_cat(
     index: int,
     fact: str,
-    image: Tuple[str, urllib3.response.HTTPResponse],
+    image: Tuple[str, HTTPResponse],
 ) -> None:
     """Saves cat's info to the disk."""
     fact_path = 'temp/cat_{0}_fact.txt'.format(index)

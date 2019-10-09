@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from typing import Callable
+from typing import Callable, Tuple
+
+from urllib3 import HTTPResponse
 
 # We reuse implementation from the direct version:
 from cats_direct_lishanda import (
@@ -9,6 +11,8 @@ from cats_direct_lishanda import (
     fetch_cat_image,
     save_cat,
 )
+
+MOCK = False
 
 
 class CatProcessor(object):
@@ -22,28 +26,28 @@ class CatProcessor(object):
 
     def __init__(
         self,
-        fetch_text: Callable,
-        fetch_image: Callable,
-        process_text_and_image: Callable,
+        fetch_text: Callable[[bool], str],
+        fetch_image: Callable[[], Tuple[str, HTTPResponse]],
+        process_txt_img: Callable[[int, str, Tuple[str, HTTPResponse]], None],
     ):
         """Saves dependencies into internal state."""
         self._fetch_text = fetch_text
         self._fetch_image = fetch_image
-        self._process_text_and_image = process_text_and_image
+        self._process_text_and_image = process_txt_img
 
     def __call__(self, index: int):
         """Runs the process of cat downloading."""
         return self._process_text_and_image(
             index,
-            self._fetch_text(),
+            self._fetch_text(MOCK),
             self._fetch_image(),
         )
 
 
 def main(
     cats_to_fetch: int,
-    process_cat: Callable,
-    show_information: Callable,
+    process_cat: CatProcessor,
+    show_information: Callable[[str], None],
 ) -> None:
     """Fetches cats and saves the into temp folder."""
     if not cats_to_fetch:

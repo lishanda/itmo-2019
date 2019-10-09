@@ -28,7 +28,7 @@ class CatsDirectTester(unittest.TestCase):  # noqa WPS230
             self.metadata[INDEX_STRING],
         )
         self.test_image = '{0}.{1}'.format(
-            'test_image',
+            'students/lishanda/4/test_image',
             self.metadata[EXTENSION_STRING],
         )
         self.result_image = '{0}/cat_{1}_image.{2}'.format(
@@ -79,7 +79,7 @@ class CatsDirectTester(unittest.TestCase):  # noqa WPS230
 
     def test_integration(self):
         """Test func."""
-        format_str = 'python cats_direct_lishanda.py {0}'  # noqa E800
+        format_str = 'python students/lishanda/4/cats_direct_lishanda.py {0}'  # noqa E800
         arg = '--count=2'
         command_str = format_str.format(arg)
         assert subprocess.call(command_str, shell=True) == 0  # noqa: S602, E501
