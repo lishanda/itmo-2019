@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import pytest
 import shutil
 import subprocess  # noqa S404
 import unittest
@@ -47,11 +48,13 @@ class CatsDirectTester(unittest.TestCase):  # noqa WPS230
         parsed = cats_direct.create_parser().parse_args(args)
         assert parsed.count == int(args[-1])
 
+    @pytest.mark.remote_data
     def test_fetch_cat_fact(self):
         """Cat fact fetching test."""
         fact = cats_direct.fetch_cat_fact()
         assert fact != ''
 
+    @pytest.mark.remote_data
     def test_fetch_cat_image(self):
         """Cat image fetching test."""
         fetched = cats_direct.fetch_cat_image()

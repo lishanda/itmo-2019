@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import pytest
 import shutil
 import subprocess  # noqa S404
 import unittest
@@ -23,6 +24,7 @@ class CatsCompositionTester(unittest.TestCase):
         """Tear Down test."""
         shutil.rmtree(self.temp)
 
+    @pytest.mark.remote_data
     def test_main(self):
         """Main test."""
         fact_file = '{0}/cat_{1}_fact.txt'.format(self.temp, self.count)
