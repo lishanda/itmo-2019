@@ -5,7 +5,7 @@ from ..models import *
 from ..views import api
 
 
-class TestCreateOrder(TestCase):
+class TestOrder(TestCase):
 
     def setUp(self):
         cheese = Ingredient(title='Cheese')

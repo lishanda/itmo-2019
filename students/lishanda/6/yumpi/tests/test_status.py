@@ -5,7 +5,7 @@ from ..models import *
 from ..views import api
 
 
-class TestStats(TestCase):
+class TestStatus(TestCase):
 
     def decode_json(self, json_response):
         return json_response._container[0].decode('utf-8')

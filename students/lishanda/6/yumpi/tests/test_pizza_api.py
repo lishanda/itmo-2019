@@ -4,7 +4,7 @@ from ..models import *
 from ..views import api
 
 
-class TestGetPizzas(TestCase):
+class TesPizzaApi(TestCase):
 
     def decode_json(self, json_response):
         return json_response._container[0].decode('utf-8')
