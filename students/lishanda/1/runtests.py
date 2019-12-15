@@ -35,7 +35,8 @@ def get_tests_from_module(module):
 
 def files_from_path(target_path, mask):
     """Load files from specified folder."""
-    return glob.glob('{0}/{1}'.format(target_path, mask), recursive=True)
+    mask_path = os.path.join(target_path, mask)
+    return glob.glob(mask_path, recursive=True)
 
 
 def test_test(test, test_file):
@@ -48,7 +49,7 @@ def test_test(test, test_file):
     print('{0} | {1} - {2}'.format(  # noqa: T001
         test_file,
         test[0],
-        'ok' if succeed else 'fail',
+        'successful' if succeed else 'failed',
     ))
 
 
@@ -58,7 +59,8 @@ def launch_testing(path=''):
     if not path:
         path = os.getcwd()
 
-    for t_file in files_from_path(path, '{0}*{1}'.format(PREFIX, EXT)):
+    files = files_from_path(path, '{0}*{1}'.format(PREFIX, EXT))
+    for t_file in files:
         if load_module(t_file) is None:
             continue
 
@@ -66,8 +68,3 @@ def launch_testing(path=''):
         tests = get_tests_from_module(load_module(t_file))
         for test in tests.items():
             test_test(test, t_file)
-
-
-if __name__ == '__main__':
-    path = input()  # noqa: WPS421, S322
-    launch_testing(path)
