@@ -30,9 +30,6 @@ class CatsCompositionTester(unittest.TestCase):
     @pytest.mark.remote_data
     def test_main(self):
         """Testing main function."""
-        if os.path.exists(self.test_fact_file):
-            os.remove(self.test_fact_file)
-
         cat_processor = cats_composition.CatProcessor(
             cats_composition.fetch_cat_fact,
             cats_composition.fetch_cat_image,

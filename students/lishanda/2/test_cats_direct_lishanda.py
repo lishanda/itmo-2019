@@ -20,17 +20,16 @@ class CatsDirectTester(unittest.TestCase):  # noqa WPS230
     temp = 'temp'
     dummy_img_path = '{0}/{1}.{2}'.format(path, 'dummy', IMG_EXT)
     dummy_fact = 'Amazing dummy fact'
+    test_fact_file = 'temp/cat_{0}_fact.txt'.format(INDEX)
+    test_img_file = 'temp/cat_{0}_image.{1}'.format(
+        INDEX,
+        IMG_EXT,
+    )
 
     def setUp(self):
-        """Set Up test."""
+        """Setting up test by creating temp folder."""
         if not os.path.exists(self.temp):
             os.mkdir(self.temp)
-
-        self.test_fact_file = 'temp/cat_{0}_fact.txt'.format(INDEX)
-        self.test_img_file = 'temp/cat_{0}_image.{1}'.format(
-            INDEX,
-            IMG_EXT,
-        )
 
     def tearDown(self):
         """Tearing Down test by deleting temporary resources."""
