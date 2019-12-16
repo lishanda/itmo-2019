@@ -77,13 +77,6 @@ class CatsDirectTester(unittest.TestCase):  # noqa WPS230
         with open(self.test_img_file, 'rb') as image_file:
             self.assertNotEqual(len(image_file.read()), 0)
 
-        self.assertTrue(os.path.isfile(self.test_fact_file))
-        with open(self.test_fact_file, 'rb') as fact_file:
-            fact = fact_file.read()
-            self.assertNotEqual(fact, '')
-            self.assertIsInstance(fact, bytes)
-            self.assertEqual(len(fact), len(self.dummy_fact))
-
 
 if __name__ == '__main__':
     unittest.main()
