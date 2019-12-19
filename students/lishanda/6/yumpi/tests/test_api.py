@@ -29,12 +29,12 @@ class TestPostOrder(TestCase):
         """Setting up database for testing purpose."""
         create_test_data(default_dataset)
 
-    def test_correct_order(self, address, email):
+    def test_correct_order(self):
         """Testing availability of :term:`Order` posting API."""
         post_data = {
-            'pizzas': [2, 2, 2],
-            'delivery_address': address,
-            'customer_email': email,
+            'pizzas': [1, 1, 1, 1, 1],
+            'delivery_address': 'Birzhevaja line, 12',
+            'customer_email': 'pizza@lover.ru',
         }
         response = self.client.post(path='/api/order/', data=post_data)
         assert response.status_code == CREATED_CODE
