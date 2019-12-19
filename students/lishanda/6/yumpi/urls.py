@@ -3,7 +3,7 @@
 from django.urls import include, path
 from rest_framework import routers
 
-from .views import (
+from yumpi.views import (
     IngredientViewSet,
     OrderViewSet,
     PizzaViewSet,
@@ -17,5 +17,5 @@ router.register('order', OrderViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('statistics/pizza', get_statistics)
+    path('statistics/pizza', get_statistics),
 ]

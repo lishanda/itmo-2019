@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals  # noqa: WPS422
-
 from datetime import date
 from enum import Enum
 
@@ -12,6 +10,7 @@ CHAR_LENGTH = 64
 
 class Ingredient(models.Model):
     """A model that defines :term:`Ingredient` object."""
+
     title = models.CharField(max_length=CHAR_LENGTH)
 
     def __str__(self):
@@ -52,9 +51,9 @@ class Order(models.Model):
             ('ACCEPTED', 'ACCEPTED'),
             ('COOKING', 'COOKING'),
             ('DELIVERY', 'DELIVERY'),
-            ('FINISHED', 'FINISHED')
+            ('FINISHED', 'FINISHED'),
         ],
-        default='ACCEPTED'
+        default='ACCEPTED',
     )
 
     def __str__(self):

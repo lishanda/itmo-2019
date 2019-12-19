@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from typing import Any, Dict, List, Tuple
+from typing import List
+
 from yumpi.models import Ingredient, Order, Pizza
 
 default_dataset = {
@@ -35,8 +36,11 @@ def create_test_pizza(title: str, price: int, ingredients: List[int]) -> Pizza:
     return pizza
 
 
-def create_test_order(pizzas: List[int], delivery_address: str,
-                      customer_email: str) -> Order:
+def create_test_order(
+    pizzas: List[int],
+    delivery_address: str,
+    customer_email: str,
+) -> Order:
     """Creates :term:`Order` object for test purpose."""
     order = Order(
         delivery_address=delivery_address,
