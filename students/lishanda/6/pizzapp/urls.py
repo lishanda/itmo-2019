@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from django.conf.urls import url
 from django.contrib import admin
+from django.urls import include, path
 
-from yumpi.views import api
+from yumpi import urls as yumpi_urls
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url('api/pizza', api.get_pizzas),
-    url('api/order', api.create_order),
-    url('api/statistics/pizza', api.stats),
+    path('admin/', admin.site.urls),
+    path('api/', include(yumpi_urls)),
 ]

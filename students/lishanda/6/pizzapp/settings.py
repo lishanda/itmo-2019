@@ -28,7 +28,7 @@ SECRET_KEY = '34%x(yx9=-j!e&6065%p5r+$22muu3kk%+$224wr=l'  # noqa: S105
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []  # noqa: WPS407
+ALLOWED_HOSTS = ['testserver', '127.0.0.1']  # noqa: WPS407
 
 # Application definition
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = [  # noqa: WPS407
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'yumpi',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [  # noqa: WPS407
