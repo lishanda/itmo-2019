@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from datetime import date
 from typing import List
 
 from yumpi.models import Ingredient, Order, Pizza
@@ -16,6 +17,8 @@ default_dataset = {
         ([1], 'Sovetkaja ul., 120', 'pizza@lover.ru'),
     ],
 }
+
+test_date = str(date.today())
 
 
 def create_test_ingredient(title: str) -> Ingredient:
@@ -40,11 +43,13 @@ def create_test_order(
     pizzas: List[int],
     delivery_address: str,
     customer_email: str,
+    order_date: str = test_date,
 ) -> Order:
     """Creates :term:`Order` object for test purpose."""
     order = Order(
         delivery_address=delivery_address,
         customer_email=customer_email,
+        order_date=order_date,
     )
     order.save()
     order.pizzas.set(pizzas)
