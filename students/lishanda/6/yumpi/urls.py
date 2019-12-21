@@ -8,14 +8,16 @@ from yumpi.views import (
     OrderViewSet,
     PizzaViewSet,
     get_statistics,
+    post_order,
 )
 
 router = routers.DefaultRouter()
 router.register('pizza', PizzaViewSet)
 router.register('ingredient', IngredientViewSet)
-router.register('order', OrderViewSet)
+router.register('admin_order', OrderViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('order/', post_order),
     path('statistics/pizza', get_statistics),
 ]

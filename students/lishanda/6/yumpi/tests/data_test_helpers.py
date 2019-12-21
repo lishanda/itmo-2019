@@ -5,19 +5,6 @@ from typing import List
 
 from yumpi.models import Ingredient, Order, Pizza
 
-default_dataset = {
-    'ingredient': ['Cheese', 'Chicken', 'Tomato', 'Bacon'],
-    'pizza': [
-        ('Margaret', 100, [1]),
-        ('Classic', 120, [1, 2]),
-        ('Megameat', 140, [1, 2, 3, 4]),
-    ],
-    'order': [
-        ([1, 2, 3], 'Nevskii pr., 12', 'customer@real.com'),
-        ([1], 'Sovetkaja ul., 120', 'pizza@lover.ru'),
-    ],
-}
-
 test_date = str(date.today())
 
 

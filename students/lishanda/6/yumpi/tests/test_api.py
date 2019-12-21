@@ -4,27 +4,15 @@ from datetime import date, timedelta
 
 from hypothesis.extra.django import TestCase
 
-from yumpi.tests.data_helpers import (
-    create_test_data,
-    create_test_order,
+from yumpi.logic.constants import (
+    BAD_REQUEST_CODE,
+    CREATED_CODE,
+    SUCCESS_CODE,
     default_dataset,
+    mod_stats_dict,
+    stats_dict,
 )
-
-SUCCESS_CODE = 200
-CREATED_CODE = 201
-BAD_REQUEST_CODE = 400
-
-stats_dict = {
-    'all': 8,
-    'pizzas': {'1': 8, '2': 3, '3': 1},
-    'statuses': {'ACCEPTED': 6, 'COOKING': 0, 'DELIVERY': 1, 'FINISHED': 1},
-}
-
-mod_stats_dict = {
-    'all': 9,
-    'pizzas': {'1': 8, '2': 4, '3': 1},
-    'statuses': {'ACCEPTED': 7, 'COOKING': 0, 'DELIVERY': 1, 'FINISHED': 1},
-}
+from yumpi.tests.data_test_helpers import create_test_data, create_test_order
 
 
 class TestGetPizzas(TestCase):

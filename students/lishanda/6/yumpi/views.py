@@ -1,12 +1,20 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-from typing import Dict
 
+from django.http import JsonResponse
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from pizzapp.settings import ENABLE_MAILING
+from yumpi.logic.constants import BAD_REQUEST_CODE, CREATED_CODE
+from yumpi.logic.order_mail import send_mail_on_order
+from yumpi.logic.order_statistics import (
+    overall_statistics,
+    pizza_statistics,
+    status_statistics,
+)
 from yumpi.models import Ingredient, Order, Pizza
 from yumpi.serializers import (
     IngredientSerializer,
@@ -36,6 +44,25 @@ class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
 
 
+@api_view(['POST'])
+def post_order(request):
+    """Posts :term:`Order` and sends email to customer."""
+    if request.method == 'POST':
+        order_data = request.POST.copy()
+        serializer = OrderSerializer(data=order_data)
+        if serializer.is_valid():
+            serializer.save()
+            order = Order.objects.get(pk=serializer.data['id'])
+            order.save()
+            if ENABLE_MAILING:
+                send_mail_on_order(order.delivery_time, order.customer_email)
+                order.email_sent = True
+                order.save()
+        if serializer.errors:
+            return JsonResponse(serializer.errors, status=BAD_REQUEST_CODE)
+        return JsonResponse(serializer.data, status=CREATED_CODE)
+
+
 @api_view(['GET'])
 def get_statistics(request):
     """Counts statistics for :term:`Order`."""
@@ -49,30 +76,3 @@ def get_statistics(request):
         'statuses': status_statistics(orders_today),
     }
     return Response(response)
-
-
-def overall_statistics(orders) -> int:
-    """Counts all :term:`Order` instances."""
-    return orders.count()
-
-
-def pizza_statistics(orders) -> Dict[str, int]:
-    """Counts different :term:`Pizza` types."""
-    pizzatype_dict: Dict[str, int] = {}
-    for order in orders:
-        for pizza in order.pizzas.all():
-            try:
-                pizzatype_dict[pizza.id] += 1
-            except KeyError:
-                pizzatype_dict[pizza.id] = 1
-    return pizzatype_dict
-
-
-def status_statistics(orders) -> Dict[str, int]:
-    """Counts different statuses of :term:`Order` instances."""
-    choices = Order._meta.get_field('status').choices  # noqa: WPS437
-    statuses = [choice[0] for choice in choices]
-    status_dict = dict.fromkeys(statuses)
-    for status in statuses:
-        status_dict[status] = orders.filter(status=status).count()
-    return status_dict

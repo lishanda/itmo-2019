@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from datetime import date
+from datetime import date, datetime
 from enum import Enum
 
 from django.db import models
+
+from yumpi.logic.order_time import (
+    calculate_delivery_time,
+    order_during_working_hours,
+)
 
 CHAR_LENGTH = 64
 
@@ -45,6 +50,7 @@ class Order(models.Model):
     pizzas = models.ManyToManyField(Pizza)
     delivery_address = models.CharField(max_length=2 * CHAR_LENGTH)
     customer_email = models.EmailField(max_length=CHAR_LENGTH)
+    email_sent = models.BooleanField(default=False)
     status = models.CharField(
         max_length=CHAR_LENGTH // 4,
         choices=[
@@ -55,6 +61,13 @@ class Order(models.Model):
         ],
         default='ACCEPTED',
     )
+
+    @property
+    def delivery_time(self):
+        """Calculates delivery time for :term:`Order`."""
+        working_hours = order_during_working_hours(datetime.now().hour)
+        number_of_pizzas = len(self.pizzas)
+        return calculate_delivery_time(number_of_pizzas, working_hours)
 
     def __str__(self):
         """Returns string representation of :term:`Order`."""
