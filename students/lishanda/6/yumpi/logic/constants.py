@@ -8,14 +8,14 @@ SHORT_TIME = 40
 LONG_TIME = 60
 
 stats_dict = {
-    'all': 5,
-    'pizzas': {'1': 5, '2': 1, '3': 1},
-    'statuses': {'ACCEPTED': 5, 'COOKING': 0, 'DELIVERY': 0, 'FINISHED': 0},
+    'all': 2,
+    'pizzas': {'1': 2, '2': 1, '3': 1},
+    'statuses': {'ACCEPTED': 2, 'COOKING': 0, 'DELIVERY': 0, 'FINISHED': 0},
 }
 mod_stats_dict = {
-    'all': 6,
-    'pizzas': {'1': 5, '2': 2, '3': 1},
-    'statuses': {'ACCEPTED': 6, 'COOKING': 0, 'DELIVERY': 0, 'FINISHED': 0},
+    'all': 3,
+    'pizzas': {'1': 2, '2': 2, '3': 1},
+    'statuses': {'ACCEPTED': 3, 'COOKING': 0, 'DELIVERY': 0, 'FINISHED': 0},
 }
 default_dataset = {
     'ingredient': ['Cheese', 'Chicken', 'Tomato', 'Bacon'],
