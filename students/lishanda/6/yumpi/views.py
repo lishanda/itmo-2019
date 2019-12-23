@@ -31,7 +31,14 @@ class IngredientViewSet(viewsets.ModelViewSet):
 
 
 class PizzaViewSet(viewsets.ModelViewSet):
-    """Displays all :term:`Pizza` instances."""
+    """
+    Displays all :term:`Pizza` instances.
+
+    .. literalinclude:: /user_stories/get_pizzas.feature
+        :language: gherkin
+
+    .. versionadded:: 0.1.0
+    """
 
     queryset = Pizza.objects.all()
     serializer_class = PizzaSerializer
@@ -50,8 +57,9 @@ def post_order(request):
     Posts :term:`Order` and sends email to customer.
 
     .. literalinclude:: /user_stories/post_order.feature
-      :language: gherkin
+        :language: gherkin
 
+    .. versionadded:: 0.1.0
     """
     if request.method == 'POST':
         order_data = request.POST.copy()
@@ -71,7 +79,14 @@ def post_order(request):
 
 @api_view(['GET'])
 def get_statistics(request):
-    """Counts statistics for :term:`Order`."""
+    """
+    Counts statistics for :term:`Order`.
+
+    .. literalinclude:: /user_stories/get_statistics.feature
+        :language: gherkin
+
+    .. versionadded:: 0.1.0
+    """
     today = datetime.datetime.today()
     day_ago = today - datetime.timedelta(hours=24)
     orders_today = Order.objects.filter(order_date__gte=day_ago)
