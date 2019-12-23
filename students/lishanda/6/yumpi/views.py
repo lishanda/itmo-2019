@@ -46,7 +46,13 @@ class OrderViewSet(viewsets.ModelViewSet):
 
 @api_view(['POST'])
 def post_order(request):
-    """Posts :term:`Order` and sends email to customer."""
+    """
+    Posts :term:`Order` and sends email to customer.
+
+    .. literalinclude:: /user_stories/post_order.feature
+      :language: gherkin
+
+    """
     if request.method == 'POST':
         order_data = request.POST.copy()
         serializer = OrderSerializer(data=order_data)

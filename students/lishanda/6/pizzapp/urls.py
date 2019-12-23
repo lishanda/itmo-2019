@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+"""Django URL Routing entry point for pizzapp project."""
+
 from django.contrib import admin
 from django.urls import include, path
 

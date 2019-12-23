@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+"""Django URL Routing for yumpi application."""
+
 from django.urls import include, path
 from rest_framework import routers
 

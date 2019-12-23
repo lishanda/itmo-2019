@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+"""Configuration for pytest."""
 
 import os
 import subprocess  # noqa: S404
